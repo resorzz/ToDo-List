@@ -6,9 +6,9 @@ function App() {
   const [tasks, setTasks] = useState([
     // Exemple de tasques inicials
     { id: 1, text: "Aprendre React", completed: false },
-    { id: 2, text: "Fer la compra", completed: true },
-    { id: 3, text: "Ir a Malaga", completed: true },
-    { id: 2, text: "Pasear por Malaga con Marghe", completed: true },
+    { id: 2, text: "Fer la compra", completed: false },
+    { id: 3, text: "Ir a Malaga", completed: false },
+    { id: 2, text: "Pasear por Malaga con Marghe", completed: false },
   ]);
 
   // Estat per guardar el valor de l'input de nova tasca
