@@ -8,9 +8,9 @@ function App() {
   const [tasks, setTasks] = useState([
     // Exemple de tasques inicials
     { id: 1, text: "Aprendre React", completed: false, priority: "medium" },
-    { id: 2, text: "Fer la compra", completed: false, priority: "low" },
-    { id: 3, text: "Ir a Malaga", completed: false, priority: "high" },
-    { id: 4, text: "Pasear por Malaga con Marghe", completed: false, priority: "high" },
+    { id: 2, text: "Hacer la compra", completed: false, priority: "low" },
+    { id: 3, text: "Carnet de conducir", completed: false, priority: "high" },
+    { id: 4, text: "CompTIA Net+", completed: false, priority: "high" },
   ]);
 
 

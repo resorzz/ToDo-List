@@ -1,27 +1,21 @@
 :root {
   /* Primitive Color Tokens */
-  --color-white: rgba(255, 255, 255, 1);
-  --color-black: rgba(0, 0, 0, 1);
-  --color-cream-50: rgba(252, 252, 249, 1);
-  --color-cream-100: rgba(255, 255, 253, 1);
-  --color-gray-200: rgba(245, 245, 245, 1);
-  --color-gray-300: rgba(167, 169, 169, 1);
-  --color-gray-400: rgba(119, 124, 124, 1);
-  --color-slate-500: rgba(98, 108, 113, 1);
-  --color-brown-600: rgba(94, 82, 64, 1);
-  --color-charcoal-700: rgba(31, 33, 33, 1);
-  --color-charcoal-800: rgba(38, 40, 40, 1);
-  --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgba(50, 184, 198, 1);
-  --color-teal-400: rgba(45, 166, 178, 1);
-  --color-teal-500: rgba(33, 128, 141, 1);
-  --color-teal-600: rgba(29, 116, 128, 1);
-  --color-teal-700: rgba(26, 104, 115, 1);
-  --color-teal-800: rgba(41, 150, 161, 1);
-  --color-red-400: rgba(255, 84, 89, 1);
-  --color-red-500: rgba(192, 21, 47, 1);
-  --color-orange-400: rgba(230, 129, 97, 1);
-  --color-orange-500: rgba(168, 75, 47, 1);
+  --color-white: #fff;
+  --color-black: #000;
+  --color-cream-50: #fcfcf9;
+  --color-cream-100: #fffffd;
+  --color-gray-200: #f5f5f5;
+  --color-gray-400: #777c7c;
+  --color-slate-500: #626c71;
+  --color-brown-600: #5e5240;
+  --color-charcoal-700: #1f2121;
+  --color-charcoal-800: #262828;
+  --color-slate-900: #13343b;
+  --color-teal-500: #21808d;
+  --color-teal-600: #1d7480;
+  --color-teal-700: #1a6873;
+  --color-red-500: #c0152f;
+  --color-orange-500: #a84b2f;
 
   /* RGB versions for opacity control */
   --color-brown-600-rgb: 94, 82, 64;
@@ -55,7 +49,7 @@
   --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
   --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
   --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
+  --color-btn-primary-text: #fcfcf9;
   --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
   --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
   --color-error: var(--color-red-500);
@@ -281,7 +275,7 @@
   --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
   --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
   --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
+  --color-btn-primary-text: #fcfcf9;
   --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
   --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
   --color-error: var(--color-red-500);
@@ -829,6 +823,7 @@ h1 {
   border: 1px solid var(--color-card-border-inner);
   transition: all var(--duration-normal) var(--ease-standard);
   overflow: hidden;
+  animation: slideInUp 0.18s ease-out;
 }
 
 .task-item:hover {
@@ -915,9 +910,9 @@ h1 {
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: var(--font-size-xs);
+  font-size: 12px;
   font-weight: var(--font-weight-semibold);
-  transition: all var(--duration-fast) var(--ease-standard);
+  transition: all 150ms var(--ease-standard);
   position: relative;
   display: flex;
   align-items: center;
@@ -978,11 +973,6 @@ h1 {
   box-shadow: 0 0 0 3px rgba(var(--color-success-rgb), 0.25);
 }
 
-.priority-btn:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
 .delete-btn {
   background-color: var(--color-error);
   color: var(--color-white);
@@ -990,8 +980,8 @@ h1 {
   border-radius: var(--radius-sm);
   padding: var(--space-8) var(--space-12);
   cursor: pointer;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: 12px;
+  font-weight: 500;
   transition: all var(--duration-normal) var(--ease-standard);
 }
 
@@ -1001,12 +991,6 @@ h1 {
   transform: scale(1.05);
 }
 
-.delete-btn:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
-/* Animaciones de entrada */
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -1018,11 +1002,6 @@ h1 {
   }
 }
 
-.task-item {
-  animation: slideInUp 0.18s ease-out;
-}
-
-/* Estados de prioridad con iconos */
 .task-item.priority-high .task-content span::before {
   content: "⚠️";
   margin-right: var(--space-8);
@@ -1046,44 +1025,35 @@ h1 {
   .app-container {
     padding: var(--space-10);
   }
-  
   .todo-container {
     padding: var(--space-20);
   }
-  
   .task-item {
     padding: var(--space-12);
   }
-  
   .task-form {
     flex-direction: column;
     gap: var(--space-8);
   }
-  
   .task-form button {
     padding: var(--space-10) var(--space-16);
   }
-  
   .task-controls {
     gap: var(--space-8);
   }
-  
   .priority-selector {
     gap: var(--space-2);
   }
-  
   .priority-btn {
     width: 24px;
     height: 24px;
-    font-size: var(--font-size-xs);
+    font-size: 12px;
   }
-  
   h1 {
-    font-size: var(--font-size-2xl);
+    font-size: 20px;
     margin-bottom: var(--space-20);
   }
-  
   .task-content span {
-    font-size: var(--font-size-base);
+    font-size: 16px;
   }
 }
