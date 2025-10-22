@@ -1,38 +1,29 @@
 import React, { useState } from "react";
 import "./App.css";
-
-const PRIORITIES = ["high", "medium", "low"];
+import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
 function App() {
-  // Estat per emmagatzemar la llista de tasques
+  // Estat per emmagatzemar la llista de tasques (amb dueDate)
   const [tasks, setTasks] = useState([
-    // Exemple de tasques inicials
-    { id: 1, text: "Aprendre React", completed: false, priority: "medium" },
-    { id: 2, text: "Hacer la compra", completed: false, priority: "low" },
-    { id: 3, text: "Carnet de conducir", completed: false, priority: "high" },
-    { id: 4, text: "CompTIA Net+", completed: false, priority: "high" },
+    { id: 1, text: "Aprendre React", completed: false, priority: "medium", dueDate: null },
+    { id: 2, text: "Hacer la compra", completed: false, priority: "low", dueDate: new Date().toISOString() },
+    { id: 3, text: "Carnet de conducir", completed: false, priority: "high", dueDate: null },
+    { id: 4, text: "CompTIA Net+", completed: false, priority: "high", dueDate: null },
+    { id: 5, text: "Hola", completed: false, priority: "high", dueDate: null },
   ]);
 
-
-  // Estat per guardar el valor de l'input de nova tasca
-  const [newTask, setNewTask] = useState("");
-  const [newPriority, setNewPriority] = useState("medium");
-
-  const handleAddTask = (e) => {
-    // Evitem que el formulari recarregui la pàgina
-    e.preventDefault();
-    if (newTask.trim() === "") return; // No afegim tasques buides
-
+  // Modifiquem la funció per rebre directament el 'text' i 'priority' des de TaskForm
+  const handleAddTask = (text, priority) => {
     const task = {
-      id: Date.now(), // ID únic basat en el timestamp
-      text: newTask,
+      id: Date.now(),
+      text: text,
       completed: false,
-      priority: newPriority,
+      priority: priority,
+      dueDate: null, // Nou camp
     };
-
-    setTasks([...tasks, task]); // Afegim la nova tasca a l'array existent
-    setNewTask(""); // Netegem l'input
-    setNewPriority("medium");
+    
+    setTasks([...tasks, task]);
   };
 
   const handleToggleComplete = (taskId) => {
@@ -55,72 +46,36 @@ function App() {
     );
   };
 
+  // NOVA FUNCIÓ per actualitzar només la data
+  const handleUpdateTaskDate = (taskId, newDate) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId 
+          ? { ...task, dueDate: newDate ? newDate.toISOString() : null } 
+          : task
+      )
+    );
+  };
+
   return (
     <div className="app-container">
       <div className="todo-container">
         <h1>La Meva Llista de Tasques</h1>
-        <form onSubmit={handleAddTask} className="task-form">
-          <input
-            type="text"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Afegeix una nova tasca..."
-          />
-          <div className="priority-selector">
-            {PRIORITIES.map((p) => (
-              <button
-                key={p}
-                type="button"
-                className={`priority-btn ${p} ${newPriority === p ? "active" : ""}`}
-                onClick={() => setNewPriority(p)}
-                aria-label={`Prioritat ${p}`}
-              >
-                {p === "high" ? "⚠️" : p === "medium" ? "🔶" : "🟢"}
-              </button>
-            ))}
-          </div>
-          <button type="submit">Afegir</button>
-        </form>
-        <ul className="task-list">
-          {tasks.map((task) => (
-            <li
-              key={task.id}
-              className={`task-item priority-${task.priority} ${task.completed ? "completed" : ""}`}
-            >
-              <div className={`priority-bar priority-${task.priority}`}></div>
-              <div className="task-content">
-                <span onClick={() => handleToggleComplete(task.id)}>
-                  {task.text}
-                </span>
-              </div>
-              <div className="task-controls">
-                <div className="priority-selector">
-                  {PRIORITIES.map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      className={`priority-btn ${p} ${task.priority === p ? "active" : ""}`}
-                      onClick={() => handlePriorityChange(task.id, p)}
-                      aria-label={`Canvia a prioritat ${p}`}
-                    >
-                      {p === "high" ? "⚠️" : p === "medium" ? "🔶" : "🟢"}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDeleteTask(task.id)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+
+        {/* Component TaskForm */}
+        <TaskForm onAddTask={handleAddTask} />
+
+        {/* Component TaskList amb la nova prop onUpdateTaskDate */}
+        <TaskList
+          tasks={tasks}
+          onToggleComplete={handleToggleComplete}
+          onDeleteTask={handleDeleteTask}
+          onPriorityChange={handlePriorityChange}
+          onUpdateTaskDate={handleUpdateTaskDate}
+        />
       </div>
     </div>
   );
 }
 
 export default App;
-
