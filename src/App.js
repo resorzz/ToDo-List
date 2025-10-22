@@ -9,8 +9,7 @@ function App() {
     { id: 1, text: "Aprendre React", completed: false, priority: "medium", dueDate: null },
     { id: 2, text: "Hacer la compra", completed: false, priority: "low", dueDate: new Date().toISOString() },
     { id: 3, text: "Carnet de conducir", completed: false, priority: "high", dueDate: null },
-    { id: 4, text: "CompTIA Net+", completed: false, priority: "high", dueDate: null },
-    { id: 5, text: "Hola", completed: false, priority: "high", dueDate: null },
+    { id: 4, text: "CompTIA Network+", completed: false, priority: "high", dueDate: null },
   ]);
 
   // Modifiquem la funció per rebre directament el 'text' i 'priority' des de TaskForm
